@@ -62,13 +62,13 @@ hr {
     <p id="demo" style="font-size:30px"></p>
   </div>
   <div class="bottomleft">
-    <p>Election Countdown Timer</p>
+    <p>Christmas Countdown Timer</p>
   </div>
 </div>
 
 <script>
 // Set the date we're counting down to
-var countDownDate = new Date("Feb 23, 2025 15:37:25").getTime();
+var countDownDate = new Date("Dec 25, 2025 15:37:25").getTime();
 
 // Update the count down every 1 second
 var countdownfunction = setInterval(function() {
@@ -92,7 +92,7 @@ var countdownfunction = setInterval(function() {
   // If the count down is over, write some text 
   if (distance < 0) {
     clearInterval(countdownfunction);
-    document.getElementById("demo").innerHTML = "GET OUT THE VOTE!";
+    document.getElementById("demo").innerHTML = "MERRY CHRISTMAS!";
   }
 }, 1000);
 </script>
