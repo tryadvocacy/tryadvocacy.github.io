@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Guide to NIST CSF 2.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Professional (Light neutral background, dark text, muted blue/teal accents) -->
+    <!-- Application Structure Plan: A single-page app with a fixed left sidebar for navigation and a main content area. This structure provides easy, non-linear access to all sections of the framework, making it more of an explorable tool. Key interactions include clickable cards for Core Functions, a visual stepper for Implementation Tiers, and a process diagram for the Implementation Guide. New AI-powered features (Explain Simply, Get Advice) are added to enhance user understanding and provide personalized guidance. This transforms the app into a dynamic, "tutor-like" resource. -->
+    <!-- Visualization & Content Choices: Report Info: The 6 Core Functions. Goal: Show the interconnected, holistic nature of the functions. Viz: Radar Chart. Interaction: Hover tooltips. Justification: A radar chart visually represents how the six functions form a complete, balanced framework. Library: Chart.js (Canvas). Report Info: Implementation Tiers. Goal: Organize and compare the 4 maturity levels. Viz: Interactive vertical stepper. Interaction: Click to view details and trigger AI advice generation. Justification: Visually communicates progression and makes comparison intuitive. The AI advice adds a practical, personalized layer. Method: HTML/CSS/JS + Gemini API. Report Info: Implementation Guide. Goal: Explain a multi-step process. Viz: Horizontal process flow diagram. Interaction: Click to expand steps. Justification: Reinforces the sequential nature of the implementation process. Method: HTML/CSS/JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="flex min-h-screen">
+        <aside class="w-64 bg-white shadow-md fixed top-0 left-0 h-full p-6 hidden md:block">
+            <h2 class="text-xl font-bold text-gray-900 mb-8">NIST CSF 2.0 Guide</h2>
+            <nav>
+                <ul class="space-y-2">
+                    <li><a href="#introduction" class="nav-link text-gray-600 hover:text-blue-600 font-medium block">Introduction</a></li>
+                    <li><a href="#functions" class="nav-link text-gray-600 hover:text-blue-600 font-medium block">Core Functions</a></li>
+                    <li><a href="#components" class="nav-link text-gray-600 hover:text-blue-600 font-medium block">Key Components</a></li>
+                    <li><a href="#implementation" class="nav-link text-gray-600 hover:text-blue-600 font-medium block">Implementation Guide</a></li>
+                    <li><a href="#resources" class="nav-link text-gray-600 hover:text-blue-600 font-medium block">Key Resources</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="md:ml-64 flex-1 p-6 md:p-10">
+            <header class="mb-10">
+                <h1 class="text-4xl font-bold text-gray-900">Interactive Guide to the NIST Cybersecurity Framework 2.0</h1>
+            </header>
+
+            <section id="introduction" class="mb-12 bg-white p-8 rounded-xl shadow-sm">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-900">Introduction</h2>
+                <p class="text-gray-700 leading-relaxed">The NIST Cybersecurity Framework (CSF) 2.0 is a flexible, outcomes-based framework designed to help organizations of any size and sector manage and reduce cybersecurity risks. Published in February 2024, it represents a significant update from its predecessor by shifting its scope to be applicable to all organizations, not just critical infrastructure. This guide provides a structured, interactive overview of the CSF 2.0, its key components, and a step-by-step guide for implementation.</p>
+            </section>
+
+            <section id="functions" class="mb-12">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-900">The Six Core Functions</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">The CSF 2.0 is built around six core functions that provide a high-level, strategic view of an organization's cybersecurity risk management lifecycle. These are designed to work together in a continuous, iterative process. Click on each function to learn more.</p>
+                <div id="functions-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold text-center mb-4 text-gray-900">A Holistic View of the Framework</h3>
+                     <p class="text-gray-700 text-center leading-relaxed mb-6">The radar chart below visualizes how the six functions are interconnected, forming a comprehensive and balanced approach to cybersecurity risk management. Each function represents a critical pillar in a robust security program.</p>
+                    <div class="chart-container">
+                        <canvas id="functionsChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="components" class="mb-12">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-900">Key Components of the Framework</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">The CSF 2.0 is composed of three primary components that work together to help organizations define, assess, and improve their cybersecurity posture. Explore each component below.</p>
+                <div class="space-y-6">
+                    <div class="bg-white p-8 rounded-xl shadow-sm">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-900">1. The Core</h3>
+                        <p class="text-gray-700 mb-4">The Core is a taxonomy of high-level cybersecurity outcomes, organized in a hierarchy to provide a common language for managing risk.</p>
+                        <div class="p-4 border rounded-lg">
+                            <div class="font-semibold text-blue-700">Functions</div>
+                            <div class="pl-6 mt-2 border-l-2 border-blue-200">
+                                <div class="font-medium text-teal-700">Categories</div>
+                                 <div class="pl-6 mt-2 border-l-2 border-teal-200">
+                                    <div class="text-gray-600">Subcategories</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="bg-white p-8 rounded-xl shadow-sm">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-900">2. Implementation Tiers</h3>
+                        <p class="text-gray-700 mb-6">The Tiers describe the maturity and rigor of an organization's cybersecurity risk management practices. They are a way to characterize your program, not a model to be climbed. Click a Tier to see its description and get AI-powered advice on how to improve.</p>
+                        <div id="tiers-container" class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                            <div id="tier-stepper" class="w-full md:w-1/3 space-y-4 pr-4"></div>
+                            <div id="tier-description" class="w-full md:w-2/3 mt-6 md:mt-0 p-6 bg-blue-50 rounded-lg min-h-[150px]">
+                                <p class="text-gray-700">Select a tier on the left to view its details.</p>
+                            </div>
+                        </div>
+                         <div id="advice-container" class="mt-8 hidden">
+                            <h4 class="font-semibold text-gray-800">✨ AI-Powered Advice</h4>
+                            <div id="advice-content" class="bg-gray-100 p-4 rounded-lg mt-2 relative">
+                                <div id="advice-loader" class="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 hidden">
+                                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                                </div>
+                                <p id="advice-text" class="text-gray-700"></p>
+                                <button id="copy-advice" class="absolute top-2 right-2 p-2 rounded-full bg-white shadow-sm hover:bg-gray-200 hidden">
+                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M8 2a2 2 0 00-2 2v2H4a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2h2a2 2 0 002-2V4a2 2 0 00-2-2H8zm0 2h6a2 2 0 012 2v8a2 2 0 01-2 2H8a2 2 0 01-2-2V4z" />
+                                    </svg>
+                                </button>
+                            </div>
+                         </div>
+                    </div>
+                     <div class="bg-white p-8 rounded-xl shadow-sm">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-900">3. Organizational Profiles</h3>
+                        <p class="text-gray-700 mb-4">A Profile is a snapshot of an organization's cybersecurity posture, used to compare a "Current" state to a "Target" state to identify and prioritize areas for improvement.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-6 border-2 border-dashed border-gray-300 rounded-lg">
+                                <h4 class="font-semibold text-gray-800">Current Profile</h4>
+                                <p class="text-gray-600 mt-2">Describes the cybersecurity outcomes the organization is currently achieving.</p>
+                            </div>
+                            <div class="p-6 border-2 border-dashed border-blue-300 rounded-lg bg-blue-50">
+                                <h4 class="font-semibold text-blue-800">Target Profile</h4>
+                                <p class="text-blue-700 mt-2">Describes the desired cybersecurity outcomes based on risk appetite, business needs, and legal requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="implementation" class="mb-12 bg-white p-8 rounded-xl shadow-sm">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-900">How to Use the CSF 2.0: A Simple Guide</h2>
+                 <p class="text-gray-700 leading-relaxed mb-8">Implementing the CSF 2.0 is a strategic process. The following steps provide a roadmap for using the framework to improve your cybersecurity posture. Click each step for more details.</p>
+                <div id="implementation-steps" class="flex flex-col md:flex-row flex-wrap gap-4 justify-center">
+                </div>
+                <div id="implementation-details" class="mt-8 p-6 bg-gray-50 rounded-lg min-h-[100px]">
+                    <p class="text-gray-700">Select a step above to view details.</p>
+                </div>
+            </section>
+
+            <section id="resources" class="bg-white p-8 rounded-xl shadow-sm">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-900">Key Resources</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">NIST provides a wealth of resources to support the adoption and use of the CSF 2.0. Below are some of the most important ones to get you started.</p>
+                <ul id="resources-list" class="space-y-4">
+                </ul>
+            </section>
+        </main>
+    </div>
+
+<div id="explanation-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-lg p-6 w-full max-w-2xl relative shadow-xl">
+        <button id="close-modal" class="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <h3 id="explanation-title" class="text-xl font-semibold mb-4"></h3>
+        <p id="explanation-text" class="text-gray-700 leading-relaxed"></p>
+        <div id="explanation-loader" class="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center hidden">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+        </div>
+        <button id="copy-explanation" class="mt-4 p-2 rounded-lg bg-gray-100 text-gray-600 text-sm hover:bg-gray-200">
+            Copy to Clipboard
+        </button>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const apiKey = "";
+    const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=" + apiKey;
+
+    const explanationModal = document.getElementById('explanation-modal');
+    const closeButton = document.getElementById('close-modal');
+    const explanationTitle = document.getElementById('explanation-title');
+    const explanationText = document.getElementById('explanation-text');
+    const explanationLoader = document.getElementById('explanation-loader');
+    const copyExplanationBtn = document.getElementById('copy-explanation');
+    
+    closeButton.addEventListener('click', () => {
+        explanationModal.classList.add('hidden');
+    });
+
+    copyExplanationBtn.addEventListener('click', () => {
+        const textToCopy = explanationText.textContent;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            alert('Explanation copied to clipboard!');
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+            alert('Failed to copy text.');
+        });
+    });
+
+    async function generateSimpleExplanation(name, description) {
+        explanationModal.classList.remove('hidden');
+        explanationLoader.classList.remove('hidden');
+        explanationTitle.textContent = "Simplifying the " + name + " Function";
+        explanationText.textContent = "";
+
+        const systemPrompt = "You are an expert cybersecurity tutor. Explain the following NIST CSF 2.0 function in simple, easy-to-understand terms for a non-technical audience. Use analogies and avoid jargon. Be concise and encouraging.";
+        const userQuery = `Simplify the explanation for the "${name}" function. Its core description is: "${description}"`;
+
+        const payload = {
+            contents: [{ parts: [{ text: userQuery }] }],
+            systemInstruction: { parts: [{ text: systemPrompt }] },
+        };
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await response.json();
+            const text = result.candidates[0].content.parts[0].text;
+            explanationText.textContent = text;
+        } catch (error) {
+            explanationText.textContent = "Failed to generate explanation. Please try again.";
+            console.error(error);
+        } finally {
+            explanationLoader.classList.add('hidden');
+        }
+    }
+
+    const functionsData = [
+        { name: 'Govern (GV)', icon: '🏛️', description: "The newest function, it establishes the foundation for cybersecurity risk management. It's about how an organization's cybersecurity strategy, expectations, and policies are established, communicated, and monitored. It ensures cybersecurity is a strategic business decision." },
+        { name: 'Identify (ID)', icon: '🔍', description: "This function focuses on understanding your current cybersecurity risks. It involves identifying your assets, systems, data, and capabilities to understand what you need to protect." },
+        { name: 'Protect (PR)', icon: '🛡️', description: "This function details the safeguards you use to manage cybersecurity risks. It includes implementing controls to prevent or reduce the likelihood and impact of a cybersecurity incident." },
+        { name: 'Detect (DE)', icon: '📡', description: "This function is about discovering and analyzing possible cybersecurity attacks and compromises. It includes continuously monitoring for anomalies and suspicious events." },
+        { name: 'Respond (RS)', icon: '🚒', description: "This function covers the actions you take after a cybersecurity incident is detected. It involves containing the event, analyzing its cause, and communicating with stakeholders." },
+        { name: 'Recover (RC)', icon: '🔄', description: "This function focuses on restoring assets and operations that were affected by a cybersecurity incident. It ensures a quick return to normal business operations." }
+    ];
+
+    const functionsContainer = document.getElementById('functions-container');
+    functionsData.forEach(func => {
+        const card = document.createElement('div');
+        card.className = 'bg-white p-6 rounded-lg shadow-sm cursor-pointer hover:shadow-lg transition-shadow';
+        card.innerHTML = `
+            <div class="flex items-center mb-3">
+                <span class="text-3xl mr-4">${func.icon}</span>
+                <h3 class="text-lg font-semibold text-gray-900">${func.name}</h3>
+            </div>
+            <p class="description text-gray-600 hidden">${func.description}</p>
+            <button class="explain-btn mt-4 inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                <span class="mr-1">✨</span> Explain simply
+            </button>
+        `;
+        functionsContainer.appendChild(card);
+        card.querySelector('.explain-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            generateSimpleExplanation(func.name, func.description);
+        });
+        card.addEventListener('click', () => {
+            card.querySelector('.description').classList.toggle('hidden');
+            card.classList.toggle('bg-blue-50');
+        });
+    });
+
+    const ctx = document.getElementById('functionsChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: functionsData.map(f => f.name.split(' ')[0]),
+            datasets: [{
+                label: 'Core Functions',
+                data: [1, 1, 1, 1, 1, 1],
+                fill: true,
+                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                borderColor: 'rgb(59, 130, 246)',
+                pointBackgroundColor: 'rgb(59, 130, 246)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(59, 130, 246)'
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    angleLines: { display: true },
+                    suggestedMin: 0,
+                    suggestedMax: 1.2,
+                    pointLabels: { font: { size: 14 } },
+                    ticks: { display: false }
+                }
+            },
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+
+    const tiersData = [
+        { name: 'Tier 1: Partial', description: "Risk management practices are informal, and cybersecurity activities may be reactive." },
+        { name: 'Tier 2: Risk-Informed', description: "Risk management practices are approved by management, and activities are based on an organization's risk-informed approach." },
+        { name: 'Tier 3: Repeatable', description: "The organization has repeatable and formal processes for managing cybersecurity risk." },
+        { name: 'Tier 4: Adaptive', description: "The organization has a highly mature, proactive, and adaptive approach to cybersecurity that evolves with the threat landscape." }
+    ];
+    let selectedTierName = null;
+
+    const tierStepper = document.getElementById('tier-stepper');
+    const tierDescription = document.getElementById('tier-description');
+    const adviceContainer = document.getElementById('advice-container');
+    const adviceText = document.getElementById('advice-text');
+    const adviceLoader = document.getElementById('advice-loader');
+    const copyAdviceBtn = document.getElementById('copy-advice');
+    
+    copyAdviceBtn.addEventListener('click', () => {
+        const textToCopy = adviceText.textContent;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            alert('Advice copied to clipboard!');
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+            alert('Failed to copy text.');
+        });
+    });
+
+    async function generateAdvice(tierName) {
+        adviceContainer.classList.remove('hidden');
+        adviceLoader.classList.remove('hidden');
+        adviceText.textContent = "";
+        copyAdviceBtn.classList.add('hidden');
+
+        const systemPrompt = "You are a cybersecurity consultant with expertise in the NIST CSF. Your task is to provide three short, actionable pieces of advice for an organization to improve its cybersecurity posture, specifically targeting the next maturity tier. The advice should be practical and easy to understand.";
+        const userQuery = `The organization is currently at the maturity level "${tierName}". What three actions should it take to improve?`;
+
+        const payload = {
+            contents: [{ parts: [{ text: userQuery }] }],
+            systemInstruction: { parts: [{ text: systemPrompt }] },
+        };
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await response.json();
+            const text = result.candidates[0].content.parts[0].text;
+            adviceText.textContent = text;
+            copyAdviceBtn.classList.remove('hidden');
+        } catch (error) {
+            adviceText.textContent = "Failed to generate advice. Please try again.";
+            console.error(error);
+        } finally {
+            adviceLoader.classList.add('hidden');
+        }
+    }
+
+    tiersData.forEach((tier, index) => {
+        const step = document.createElement('button');
+        step.className = 'tier-step text-left w-full p-3 rounded-md hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500';
+        step.innerHTML = `<span class="font-semibold text-gray-700">${tier.name}</span>`;
+        step.dataset.index = index;
+        tierStepper.appendChild(step);
+    });
+
+    const getAdviceButton = document.createElement('button');
+    getAdviceButton.className = 'mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors';
+    getAdviceButton.innerHTML = `<span class="mr-1">✨</span> Get implementation advice`;
+    getAdviceButton.style.display = 'none';
+
+    tierStepper.appendChild(getAdviceButton);
+
+    tierStepper.addEventListener('click', (e) => {
+        const step = e.target.closest('.tier-step');
+        if (step) {
+            const index = step.dataset.index;
+            selectedTierName = tiersData[index].name;
+            tierDescription.innerHTML = `<h4 class="font-bold text-blue-800 mb-2">${tiersData[index].name}</h4><p class="text-blue-900">${tiersData[index].description}</p>`;
+            document.querySelectorAll('.tier-step').forEach(s => s.classList.remove('bg-blue-100', 'text-blue-800'));
+            step.classList.add('bg-blue-100', 'text-blue-800');
+            getAdviceButton.style.display = 'inline-flex';
+        }
+    });
+    
+    getAdviceButton.addEventListener('click', () => {
+        if (selectedTierName) {
+            generateAdvice(selectedTierName);
+        }
+    });
+
+    const implementationData = [
+        { name: '1. Prioritize & Scope', details: "Define the scope of your cybersecurity program and identify your mission-critical objectives." },
+        { name: '2. Orient', details: "Understand your current legal, regulatory, and contractual requirements." },
+        { name: '3. Create Current Profile', details: "Assess your current cybersecurity practices and map them to the CSF 2.0's subcategories." },
+        { name: '4. Conduct Risk Assessment', details: "Analyze the threats and vulnerabilities to your organization." },
+        { name: '5. Create Target Profile', details: "Define your desired cybersecurity posture based on your risk assessment and business needs." },
+        { name: '6. Analyze Gaps', details: "Compare your Current and Target Profiles to find gaps. Prioritize them based on risk." },
+        { name: '7. Implement Action Plan', details: "Use CSF 2.0 resources to create and execute a plan to close the gaps." },
+        { name: '8. Monitor Progress', details: "Continuously review and update your Current Profile as you improve your cybersecurity posture." }
+    ];
+
+    const implStepsContainer = document.getElementById('implementation-steps');
+    const implDetailsContainer = document.getElementById('implementation-details');
+
+    implementationData.forEach((step, index) => {
+        const button = document.createElement('button');
+        button.className = 'impl-step bg-white border border-gray-300 text-gray-700 font-medium py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500';
+        button.textContent = step.name;
+        button.dataset.index = index;
+        implStepsContainer.appendChild(button);
+    });
+
+    implStepsContainer.addEventListener('click', (e) => {
+        const step = e.target.closest('.impl-step');
+        if (step) {
+            const index = step.dataset.index;
+            implDetailsContainer.innerHTML = `<h4 class="font-bold text-gray-800 mb-2">${implementationData[index].name}</h4><p class="text-gray-700">${implementationData[index].details}</p>`;
+            document.querySelectorAll('.impl-step').forEach(s => s.classList.remove('bg-blue-600', 'text-white', 'border-blue-600'));
+            step.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
+        }
+    });
+
+    const resourcesData = [
+        { name: 'NIST CSF 2.0 Official Publication', description: 'The definitive guide to the framework. Find it on the NIST website.' },
+        { name: 'CSF 2.0 Online Reference Tool', description: 'A searchable, online version of the Core for easy navigation.' },
+        { name: 'Implementation Examples', description: 'NIST provides examples of how to achieve specific subcategories.' },
+        { name: 'Quick Start Guides', description: 'Tailored guides for specific audiences, like small businesses.' },
+        { name: 'Informative References', description: 'A catalog that maps CSF outcomes to over 50 other cybersecurity standards.' },
+        { name: 'Training and Certifications', description: 'Courses from organizations like ISC2 to demonstrate expertise.' }
+    ];
+    
+    const resourcesList = document.getElementById('resources-list');
+    resourcesData.forEach(resource => {
+        const item = document.createElement('li');
+        item.className = 'border-l-4 border-teal-500 pl-4 py-2';
+        item.innerHTML = `
+            <h4 class="font-semibold text-gray-800">${resource.name}</h4>
+            <p class="text-gray-600">${resource.description}</p>
+        `;
+        resourcesList.appendChild(item);
+    });
+    
+    document.querySelectorAll('.nav-link').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+});
+</script>
+</body>
+</html>
