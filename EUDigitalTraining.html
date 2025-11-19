@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EU Digital & AI Legislation Training Manual</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Slate Gray and Sky Blue -->
+    <!-- Application Structure Plan: The SPA is designed as a top-down educational journey for managers. It starts with a high-level overview, then allows exploration of key legislative pillars (DSA, DMA, GDPR, AI Act) in a non-linear, card-based section. It then deep-dives into the most complex new area, the AI Act, with an interactive risk pyramid. A timeline provides chronological context, and a visual chart compares financial risks. The journey concludes with an actionable, interactive compliance checklist. This structure was chosen to guide users from general awareness to specific, actionable knowledge, which is more effective for training than a simple report layout. -->
+    <!-- Visualization & Content Choices: 
+        - Key Legislation: Report Info -> Core tenets of major EU digital laws. Goal -> Organize & Inform. Viz -> Interactive cards. Interaction -> Click to reveal details (scope, obligations, penalties). Justification -> Allows users to self-direct their learning to the most relevant legislation first. Method -> HTML/CSS with JS for toggling visibility.
+        - AI Act Risk Levels: Report Info -> The AI Act's risk-based structure. Goal -> Organize & Explain. Viz -> HTML/CSS pyramid diagram. Interaction -> Click on a pyramid tier to display detailed explanations for that risk level. Justification -> Visually represents the hierarchy, a core concept of the Act, making it easier to grasp than text alone. Method -> HTML/CSS with JS.
+        - Legislation Timeline: Report Info -> Key dates for legislation. Goal -> Show Change Over Time. Viz -> Horizontal timeline. Interaction -> Hover/Click on dates to see milestones. Justification -> Provides chronological context and shows the accelerating pace of regulation. Method -> HTML/CSS with JS.
+        - Financial Penalties: Report Info -> Maximum fines under each act. Goal -> Compare & Emphasize Risk. Viz -> Bar Chart. Interaction -> Tooltips on hover provide exact figures. Justification -> Translates abstract legal risk into a tangible financial impact, a key concern for management. Library -> Chart.js (Canvas).
+        - Compliance Steps: Report Info -> Necessary actions for corporate compliance. Goal -> Organize & Provide Actionable Guidance. Viz -> Interactive accordion/checklist. Interaction -> Click to expand each compliance area for detailed steps. Justification -> Breaks down a complex process into manageable, focused tasks, serving as a practical tool. Method -> HTML/CSS with JS.
+        - Gemini Integration (New): Report Info -> High-level compliance steps. Goal -> Provide Actionable Detail & Communication. Viz -> Text memo output. Interaction -> Button click triggers LLM to generate a professional, grounded internal memo for the selected step. Justification -> Translates policy into actionable internal communication. Library -> Gemini API (gemini-2.5-flash-preview-05-20 with Google Search grounding).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .pyramid-level {
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+            transition: all 0.3s ease-in-out;
+        }
+        .pyramid-level-top {
+            clip-path: polygon(35% 0%, 65% 0%, 80% 100%, 20% 100%);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -0.5rem;
+            transform: translateY(-50%);
+            width: 1rem;
+            height: 1rem;
+            border-radius: 9999px;
+            background-color: #3b82f6; /* blue-500 */
+            border: 2px solid #ffffff;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-slate-900">EU Digital Strategy Manual</h1>
+            <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-600">
+                <a href="#overview" class="hover:text-blue-600 transition-colors">Overview</a>
+                <a href="#legislation" class="hover:text-blue-600 transition-colors">Key Legislation</a>
+                <a href="#ai-act" class="hover:text-blue-600 transition-colors">AI Act Deep Dive</a>
+                <a href="#timeline" class="hover:text-blue-600 transition-colors">Timeline</a>
+                <a href="#compliance" class="hover:text-blue-600 transition-colors">Compliance</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col space-y-2">
+            <a href="#overview" class="block py-2 text-slate-600 hover:text-blue-600 transition-colors">Overview</a>
+            <a href="#legislation" class="block py-2 text-slate-600 hover:text-blue-600 transition-colors">Key Legislation</a>
+            <a href="#ai-act" class="block py-2 text-slate-600 hover:text-blue-600 transition-colors">AI Act Deep Dive</a>
+            <a href="#timeline" class="block py-2 text-slate-600 hover:text-blue-600 transition-colors">Timeline</a>
+            <a href="#compliance" class="block py-2 text-slate-600 hover:text-blue-600 transition-colors">Compliance</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="overview" class="text-center mb-24">
+            <h2 class="text-4xl font-bold mb-4 text-slate-900">Navigating the EU's Digital Future</h2>
+            <p class="max-w-3xl mx-auto text-lg text-slate-600">
+                The European Union is actively shaping the digital landscape with landmark legislation aimed at creating a safer, more open, and fair online environment. For corporate leaders, understanding and adapting to these regulations is not just about compliance—it's about strategic alignment with the future of digital business. This manual provides an interactive guide to the key legal frameworks governing digital services, markets, data, and artificial intelligence.
+            </p>
+        </section>
+
+        <section id="legislation" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">The Four Pillars of EU Digital Regulation</h2>
+                <p class="max-w-2xl mx-auto mt-2 text-slate-600">Click on each pillar to explore its core objectives, scope, and potential impact on your business. Understanding these frameworks is the first step towards robust compliance and strategic planning.</p>
+            </div>
+            <div id="legislation-cards" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            </div>
+             <div id="legislation-details" class="mt-8 p-8 bg-white rounded-lg shadow-md min-h-[200px] transition-all duration-500">
+                <p class="text-slate-500 text-center">Select a legislative pillar above to see the details here.</p>
+            </div>
+        </section>
+
+        <section id="ai-act" class="mb-24">
+             <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">AI Act Deep Dive: A Risk-Based Approach</h2>
+                <p class="max-w-2xl mx-auto mt-2 text-slate-600">The AI Act is the world's first comprehensive AI law, categorizing AI systems based on their potential risk to health, safety, and fundamental rights. Interact with the pyramid below to understand the obligations associated with each risk level.</p>
+            </div>
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="w-full md:w-1/2">
+                    <div id="ai-risk-pyramid" class="space-y-1 mx-auto max-w-sm flex flex-col-reverse">
+                        <div data-risk="minimal" class="pyramid-level bg-green-400 hover:bg-green-500 cursor-pointer p-4 text-center text-white font-semibold h-16 flex items-center justify-center">Minimal Risk</div>
+                        <div data-risk="limited" class="pyramid-level bg-yellow-400 hover:bg-yellow-500 cursor-pointer p-4 text-center text-white font-semibold h-16 flex items-center justify-center">Limited Risk</div>
+                        <div data-risk="high" class="pyramid-level bg-orange-500 hover:bg-orange-600 cursor-pointer p-4 text-center text-white font-semibold h-16 flex items-center justify-center">High-Risk</div>
+                        <div data-risk="unacceptable" class="pyramid-level-top bg-red-600 hover:bg-red-700 cursor-pointer p-4 text-center text-white font-semibold h-16 flex items-center justify-center">Unacceptable Risk</div>
+                    </div>
+                </div>
+                <div id="ai-risk-details" class="w-full md:w-1/2 p-6 bg-white rounded-lg shadow-md min-h-[320px]">
+                    <h3 id="ai-risk-title" class="text-xl font-bold mb-2 text-slate-900">Select a risk level</h3>
+                    <p id="ai-risk-description" class="text-slate-600">Click on a level in the pyramid to learn about the specific requirements and examples.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="penalties-chart" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">The Cost of Non-Compliance</h2>
+                <p class="max-w-2xl mx-auto mt-2 text-slate-600">Financial penalties for breaching these regulations are significant, often calculated as a percentage of a company's total worldwide annual turnover. This chart visualizes the maximum potential fines, highlighting the critical importance of compliance.</p>
+            </div>
+            <div class="bg-white p-4 sm:p-6 rounded-lg shadow-lg">
+                <div class="chart-container" style="position: relative; height:50vh; max-height: 450px; width:100%; max-width:800px; margin: auto;">
+                    <canvas id="finesChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">Legislative Timeline</h2>
+                <p class="max-w-2xl mx-auto mt-2 text-slate-600">Follow the journey of these key regulations from proposal to enforcement. This timeline provides context on how rapidly the EU's digital rulebook has evolved.</p>
+            </div>
+            <div class="relative pl-8 border-l-2 border-slate-200">
+                <div class="timeline-item mb-12">
+                    <h4 class="font-bold text-lg text-blue-600">2018: GDPR Enforcement</h4>
+                    <p class="text-slate-600">The General Data Protection Regulation becomes enforceable, setting a new global standard for data privacy.</p>
+                </div>
+                <div class="timeline-item mb-12">
+                    <h4 class="font-bold text-lg text-blue-600">2022: DSA & DMA Agreement</h4>
+                    <p class="text-slate-600">Political agreement is reached on the Digital Services Act and Digital Markets Act, marking a major milestone in platform regulation.</p>
+                </div>
+                 <div class="timeline-item mb-12">
+                    <h4 class="font-bold text-lg text-blue-600">2023: DMA Enforcement Begins</h4>
+                    <p class="text-slate-600">The Digital Markets Act becomes applicable, with designated gatekeepers required to comply with its obligations starting in 2024.</p>
+                </div>
+                <div class="timeline-item mb-12">
+                    <h4 class="font-bold text-lg text-blue-600">2024: DSA Full Applicability & AI Act Passed</h4>
+                    <p class="text-slate-600">The Digital Services Act becomes fully applicable to all online intermediaries. The European Parliament formally approves the AI Act.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4 class="font-bold text-lg text-blue-600">2026: AI Act Enforcement Begins</h4>
+                    <p class="text-slate-600">Most provisions of the AI Act are expected to become enforceable, following a two-year transition period after it enters into force.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="compliance" class="mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">A Corporate Leader's Compliance Roadmap</h2>
+                <p class="max-w-2xl mx-auto mt-2 text-slate-600">Compliance is an ongoing, strategic effort. This roadmap outlines the essential steps large corporations must take to align with the EU's digital and AI legislation. Expand each section to view key actions.</p>
+            </div>
+            <div id="compliance-accordion" class="space-y-4 max-w-4xl mx-auto">
+            </div>
+            <!-- New Memo Output Container for Gemini LLM -->
+            <div id="memo-output" class="mt-12 max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-xl min-h-[100px]">
+                <p class="text-slate-500 text-center">Click "✨ Draft Action Memo" on any compliance step to generate a detailed internal guidance memo.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-400">
+            <p>&copy; 2025 Corporate Training Solutions. All Rights Reserved.</p>
+            <p class="text-sm mt-2">This document is for informational and training purposes only and does not constitute legal advice.</p>
+        </div>
+    </footer>
+
+    <script>
+        async function fetchWithRetry(url, options, retries = 3) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) {
+                        if (response.status === 429 && i < retries - 1) {
+                            await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+                            continue;
+                        }
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response;
+                } catch (error) {
+                    if (i === retries - 1) throw error;
+                    await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+                }
+            }
+        }
+
+        async function generateComplianceMemo(stepTitle) {
+            const apiKey = "";
+            const model = 'gemini-2.5-flash-preview-05-20';
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+
+            const systemPrompt = "Act as a senior legal counsel specializing in EU AI, DSA, DMA, and data compliance. Your task is to generate a concise, professional internal memo (max 4-5 paragraphs) outlining necessary actions for the specific compliance step provided by the user. The memo must be clear, actionable, and suitable for distribution to department heads (Legal, IT, Product, Data). Use a formal yet direct tone.";
+            const userQuery = `Draft an internal compliance memo for the following objective: "${stepTitle}". Focus on concrete, next steps for a large multinational corporation.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                tools: [{ "google_search": {} }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            const outputContainer = document.getElementById('memo-output');
+            outputContainer.innerHTML = '<div class="flex items-center justify-center p-8 text-blue-600"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div><span class="ml-3">✨ Drafting compliance memo... Please wait.</span></div>';
+
+            try {
+                const response = await fetchWithRetry(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+
+                let text = "Could not generate compliance memo. Please try a different step or check your connection.";
+                let sourcesHtml = '';
+
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    text = candidate.content.parts[0].text.replace(/\n/g, '<br><br>');
+                    
+                    let sources = [];
+                    const groundingMetadata = candidate.groundingMetadata;
+                    if (groundingMetadata && groundingMetadata.groundingAttributions) {
+                        sources = groundingMetadata.groundingAttributions
+                            .map(attribution => ({
+                                uri: attribution.web?.uri,
+                                title: attribution.web?.title,
+                            }))
+                            .filter(source => source.uri && source.title);
+                    }
+
+                    if (sources.length > 0) {
+                        sourcesHtml = '<div class="mt-4 pt-4 border-t border-slate-100 text-xs text-slate-500"><strong>Grounded in:</strong> ' + 
+                                      sources.map(s => `<a href="${s.uri}" target="_blank" class="hover:underline">${s.title}</a>`).join(', ') +
+                                      '</div>';
+                    }
+                }
+                
+                outputContainer.innerHTML = `
+                    <h3 class="text-2xl font-bold mb-4 text-slate-900">✨ Generated Action Memo: ${stepTitle}</h3>
+                    <div class="text-slate-700 leading-relaxed bg-slate-50 p-6 rounded-lg border border-slate-200">
+                        ${text}
+                    </div>
+                    ${sourcesHtml}
+                `;
+
+            } catch (error) {
+                outputContainer.innerHTML = `<div class="p-4 bg-red-100 text-red-700 rounded-lg">Error generating content: ${error.message}</div>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const navLinks = document.querySelectorAll('#mobile-menu a, header nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.getAttribute('href').startsWith('#')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            const legislationData = {
+                dsa: {
+                    title: 'Digital Services Act (DSA)',
+                    icon: '🌐',
+                    description: 'Aims to create a safer online space by compelling platforms to quickly remove illegal content. It increases accountability and transparency for online intermediaries.',
+                    details: `
+                        <h3 class="text-xl font-bold mb-2 text-slate-900">Digital Services Act (DSA)</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                            <li><strong>Scope:</strong> Applies to all online intermediaries and platforms offering services in the EU, such as social media, marketplaces, and app stores.</li>
+                            <li><strong>Key Obligations:</strong> Implement clear notice-and-action procedures for illegal content, provide transparency on content moderation and advertising, and conduct risk assessments for very large online platforms (VLOPs).</li>
+                            <li><strong>Penalties:</strong> Fines of up to 6% of the company's total worldwide annual turnover.</li>
+                        </ul>`
+                },
+                dma: {
+                    title: 'Digital Markets Act (DMA)',
+                    icon: '⚖️',
+                    description: 'Targets large online platforms acting as "gatekeepers" to ensure digital markets are fair and contestable. It prohibits certain anti-competitive practices.',
+                    details: `
+                        <h3 class="text-xl font-bold mb-2 text-slate-900">Digital Markets Act (DMA)</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                           <li><strong>Scope:</strong> Applies to designated "gatekeeper" companies that operate a core platform service (e.g., search engines, social networks, certain messaging services) and meet specific size criteria.</li>
+                            <li><strong>Key Obligations:</strong> Must not favor their own services over rivals', must allow business users to access the data they generate, and must not prevent users from uninstalling pre-installed software.</li>
+                            <li><strong>Penalties:</strong> Fines of up to 10% of total worldwide annual turnover, rising to 20% for repeated infringements.</li>
+                        </ul>`
+                },
+                gdpr: {
+                    title: 'General Data Protection Regulation (GDPR)',
+                    icon: '🛡️',
+                    description: 'Sets the global benchmark for data protection and privacy. It strengthens individuals\' rights over their personal data and unifies data privacy laws across Europe.',
+                     details: `
+                        <h3 class="text-xl font-bold mb-2 text-slate-900">General Data Protection Regulation (GDPR)</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                            <li><strong>Scope:</strong> Applies to any organization, worldwide, that processes the personal data of individuals residing in the EU.</li>
+                            <li><strong>Key Obligations:</strong> Requires a legal basis for processing data (like user consent), mandates "privacy by design," requires timely data breach notifications, and upholds user rights like the right to access and erasure.</li>
+                            <li><strong>Penalties:</strong> Fines up to €20 million or 4% of the company's total worldwide annual turnover, whichever is higher.</li>
+                        </ul>`
+                },
+                aiAct: {
+                    title: 'The AI Act',
+                    icon: '🤖',
+                    description: 'The world\'s first comprehensive law on Artificial Intelligence. It follows a risk-based approach, imposing stricter rules on AI systems that pose a greater risk to society.',
+                     details: `
+                        <h3 class="text-xl font-bold mb-2 text-slate-900">The AI Act</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                           <li><strong>Scope:</strong> Applies to providers, importers, distributors, and users of AI systems within the EU, as well as providers based outside the EU if the system's output is used in the EU.</li>
+                            <li><strong>Key Obligations:</strong> Varies by risk level, from outright bans on certain practices (e.g., social scoring) to strict conformity assessments, risk management, and transparency requirements for high-risk systems.</li>
+                            <li><strong>Penalties:</strong> Fines can range up to €35 million or 7% of total worldwide annual turnover, depending on the infringement.</li>
+                        </ul>`
+                }
+            };
+            
+            const legislationCardsContainer = document.getElementById('legislation-cards');
+            const detailsContainer = document.getElementById('legislation-details');
+            let activeCard = null;
+
+            Object.keys(legislationData).forEach(key => {
+                const item = legislationData[key];
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer border-2 border-transparent';
+                card.dataset.key = key;
+                card.innerHTML = `
+                    <div class="text-4xl mb-4">${item.icon}</div>
+                    <h3 class="text-lg font-bold mb-2">${item.title}</h3>
+                    <p class="text-sm text-slate-600">${item.description}</p>
+                `;
+                legislationCardsContainer.appendChild(card);
+            });
+
+            legislationCardsContainer.addEventListener('click', (e) => {
+                const card = e.target.closest('[data-key]');
+                if (card) {
+                    const key = card.dataset.key;
+                    detailsContainer.innerHTML = legislationData[key].details;
+                    
+                    if (activeCard) {
+                        activeCard.classList.remove('border-blue-500', 'bg-blue-50');
+                    }
+                    card.classList.add('border-blue-500', 'bg-blue-50');
+                    activeCard = card;
+                }
+            });
+
+            const aiRiskData = {
+                unacceptable: {
+                    title: 'Unacceptable Risk',
+                    description: 'AI systems considered a clear threat to the safety, livelihoods, and rights of people. These practices are banned. Examples include social scoring by governments, real-time remote biometric identification in public spaces by law enforcement (with narrow exceptions), and manipulative AI that exploits vulnerabilities.'
+                },
+                high: {
+                    title: 'High-Risk',
+                    description: 'AI systems that can negatively affect safety or fundamental rights. These are subject to strict obligations before they can be put on the market, including risk assessments, high-quality data sets, logging of activity, human oversight, and clear user information. Examples include AI in critical infrastructure, medical devices, recruitment, and law enforcement.'
+                },
+                limited: {
+                    title: 'Limited Risk',
+                    description: 'AI systems with specific transparency obligations. When using these systems, users should be made aware they are interacting with an AI. This includes systems like chatbots, AI-generated deepfakes, and emotion recognition systems. The goal is to empower users to make informed decisions.'
+                },
+                minimal: {
+                    title: 'Minimal Risk',
+                    description: 'The vast majority of AI systems fall into this category. The Act allows the free use of minimal-risk AI, such as AI-enabled video games or spam filters. The regulation does not intervene here, as these systems pose only minimal or no risk to citizens\' rights or safety. Many companies may choose to adopt codes of conduct voluntarily.'
+                }
+            };
+
+            const pyramid = document.getElementById('ai-risk-pyramid');
+            const riskTitle = document.getElementById('ai-risk-title');
+            const riskDescription = document.getElementById('ai-risk-description');
+            let activePyramidLevel = null;
+
+            pyramid.addEventListener('click', (e) => {
+                const level = e.target.closest('[data-risk]');
+                if(level) {
+                    const riskKey = level.dataset.risk;
+                    const data = aiRiskData[riskKey];
+                    riskTitle.textContent = data.title;
+                    riskDescription.textContent = data.description;
+                    
+                    if(activePyramidLevel) {
+                       activePyramidLevel.classList.remove('ring-4', 'ring-blue-500');
+                    }
+                    level.classList.add('ring-4', 'ring-blue-500');
+                    activePyramidLevel = level;
+                }
+            });
+
+            const complianceData = [
+                {
+                    title: "1. Establish Governance & a Cross-Functional Team",
+                    content: "Compliance is not just an IT or legal issue. Form a dedicated team with representatives from legal, IT, data science, product development, and business operations. Establish clear lines of responsibility and a governance framework for data and AI usage, ensuring executive-level oversight."
+                },
+                {
+                    title: "2. Conduct a Comprehensive Data & AI Systems Audit",
+                    content: "You can't manage what you don't know you have. Conduct a thorough inventory of all personal data you process and all AI systems you develop, deploy, or use (including third-party tools). For each, map data flows, processing purposes, and classify AI systems according to the AI Act risk pyramid."
+                },
+                {
+                    title: "3. Implement 'Privacy by Design' and 'Ethics by Design'",
+                    content: "Embed data protection and ethical considerations into the entire lifecycle of your products and services. This means conducting Data Protection Impact Assessments (DPIAs) and, for high-risk AI, Conformity Assessments before deployment. Make compliance a foundational element, not an afterthought."
+                },
+                {
+                    title: "4. Develop a Robust AI Risk Management Framework",
+                    content: "For any high-risk AI systems identified, establish a continuous risk management process as required by the AI Act. This involves identifying, evaluating, and mitigating risks to health, safety, and fundamental rights throughout the AI system's lifecycle."
+                },
+                {
+                    title: "5. Ensure Full Transparency and Documentation",
+                    content: "Maintain meticulous records. For GDPR, this means records of processing activities. For the DSA, transparency reports on content moderation. For the AI Act, it means detailed technical documentation for high-risk systems, clear information for users, and logging capabilities."
+                },
+                {
+                    title: "6. Train Your People and Update Vendor Contracts",
+                    content: "Your employees are your first line of defense. Conduct regular training on data privacy and AI ethics. Review and update contracts with all third-party vendors and partners to ensure they meet EU standards and that liability is clearly defined."
+                }
+            ];
+
+            const accordionContainer = document.getElementById('compliance-accordion');
+            complianceData.forEach((item, index) => {
+                const accordionItem = document.createElement('div');
+                accordionItem.className = 'bg-white rounded-lg shadow-sm';
+                accordionItem.innerHTML = `
+                    <button class="w-full flex flex-col md:flex-row justify-between items-start md:items-center text-left p-5 font-semibold text-slate-800 hover:bg-slate-50 transition-colors duration-200">
+                        <div class="flex items-center">
+                            <span>${item.title}</span>
+                            <span class="transform transition-transform duration-300 ml-4">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </div>
+                        <button class="generate-memo-btn mt-3 md:mt-0 px-4 py-2 text-sm font-semibold bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-md" data-title="${item.title}">
+                            ✨ Draft Action Memo
+                        </button>
+                    </button>
+                    <div class="overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                        <p class="p-5 pt-0 text-slate-600">${item.content}</p>
+                    </div>
+                `;
+                accordionContainer.appendChild(accordionItem);
+                
+                const button = accordionItem.querySelector('button:first-child');
+                const content = accordionItem.querySelector('div.overflow-hidden');
+                const icon = button.querySelector('span:nth-child(2)');
+                const memoButton = accordionItem.querySelector('.generate-memo-btn');
+
+                button.addEventListener('click', (e) => {
+                    if (e.target.closest('.generate-memo-btn')) return;
+
+                    const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+                    if (isOpen) {
+                        content.style.maxHeight = '0px';
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+
+                memoButton.addEventListener('click', () => {
+                    const title = memoButton.dataset.title;
+                    generateComplianceMemo(title);
+                });
+            });
+
+            const ctx = document.getElementById('finesChart').getContext('2d');
+            const finesChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['GDPR', 'Digital Services Act (DSA)', 'AI Act', 'Digital Markets Act (DMA)'],
+                    datasets: [{
+                        label: 'Max Fine (% of Annual Global Turnover)',
+                        data: [4, 6, 7, 10],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.6)',
+                            'rgba(249, 115, 22, 0.6)',
+                            'rgba(16, 185, 129, 0.6)',
+                            'rgba(239, 68, 68, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(249, 115, 22, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(239, 68, 68, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Percentage of Global Turnover (%)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + '%';
+                                        if (context.label === 'Digital Markets Act (DMA)') {
+                                            label += ' (up to 20% for repeat offenses)';
+                                        }
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
+
+
