@@ -1,0 +1,583 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 National Security Strategy | Peace Through Strength</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#151e2e',
+                            950: '#020617',
+                        },
+                        amber: {
+                            350: '#fcd34d',
+                            450: '#fbbf24',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-white font-sans text-slate-900 selection:bg-amber-200 selection:text-amber-900 antialiased">
+
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-6">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-sm flex items-center justify-center shadow-md">
+                    <!-- Shield Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white w-6 h-6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div>
+                    <h1 id="nav-title" class="font-serif font-bold text-lg tracking-wide text-white">
+                        NSS 2025
+                    </h1>
+                    <p id="nav-subtitle" class="text-xs uppercase tracking-widest text-slate-300">
+                        United States Strategy
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex gap-8">
+                <a href="#home" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200 uppercase tracking-wider">Executive Summary</a>
+                <a href="#principles" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200 uppercase tracking-wider">Core Principles</a>
+                <a href="#priorities" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200 uppercase tracking-wider">National Priorities</a>
+                <a href="#regions" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200 uppercase tracking-wider">Regional Strategy</a>
+                <a href="#economic" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200 uppercase tracking-wider">Economic Security</a>
+            </div>
+
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-slate-900 border-t border-slate-800 shadow-xl md:hidden">
+            <div class="flex flex-col p-6 gap-4">
+                <a href="#home" class="text-left text-slate-300 hover:text-amber-400 font-medium py-2 border-b border-slate-800">Executive Summary</a>
+                <a href="#principles" class="text-left text-slate-300 hover:text-amber-400 font-medium py-2 border-b border-slate-800">Core Principles</a>
+                <a href="#priorities" class="text-left text-slate-300 hover:text-amber-400 font-medium py-2 border-b border-slate-800">National Priorities</a>
+                <a href="#regions" class="text-left text-slate-300 hover:text-amber-400 font-medium py-2 border-b border-slate-800">Regional Strategy</a>
+                <a href="#economic" class="text-left text-slate-300 hover:text-amber-400 font-medium py-2 border-b border-slate-800">Economic Security</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center bg-slate-900 overflow-hidden">
+        <!-- Abstract Background -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <div class="absolute top-0 right-0 w-1/2 h-full bg-slate-800 transform -skew-x-12 translate-x-1/4"></div>
+            <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-slate-800 rounded-full blur-3xl opacity-50"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10 pt-20">
+            <div class="max-w-4xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-900/30 border border-amber-700/50 rounded-full mb-6">
+                    <div class="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+                    <span class="text-amber-400 text-xs font-bold uppercase tracking-widest">Official Doctrine • November 2025</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-8 leading-tight">
+                    Peace Through <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-600">Strength</span>
+                </h1>
+                
+                <p class="text-xl text-slate-300 leading-relaxed mb-10 max-w-2xl border-l-4 border-amber-600 pl-6">
+                    A concrete, realistic plan connecting ends and means. This framework prioritizes the protection of core national interests over the pursuit of global domination, aligning resources to ensure American safety, prosperity, and sovereignty.
+                </p>
+
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 border-t border-slate-800 pt-8">
+                    <div class="flex flex-col">
+                        <span class="text-4xl font-serif text-white mb-2">10</span>
+                        <span class="text-sm text-slate-400 uppercase tracking-widest">Core Principles</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-4xl font-serif text-white mb-2">5</span>
+                        <span class="text-sm text-slate-400 uppercase tracking-widest">Strategic Priorities</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-4xl font-serif text-white mb-2">4</span>
+                        <span class="text-sm text-slate-400 uppercase tracking-widest">Key Regions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Principles Section -->
+    <section id="principles" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-4">Core Principles of Realism</h2>
+                <div class="w-20 h-1 bg-amber-600 mx-auto mb-6"></div>
+                <p class="text-slate-600">
+                    The strategy moves away from "laundry lists of wishes" toward a disciplined approach focused on the national interest.
+                </p>
+            </div>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-sm shadow-sm border-l-4 border-slate-200 hover:border-amber-600 transition-all duration-300 group h-full">
+                    <div class="w-12 h-12 bg-slate-50 rounded-sm flex items-center justify-center mb-6 group-hover:bg-amber-50 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-slate-700 group-hover:text-amber-700 transition-colors"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors">Peace Through Strength</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">Maintaining the world's most capable military and strongest economy is the most effective deterrent against aggression.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-sm shadow-sm border-l-4 border-slate-200 hover:border-amber-600 transition-all duration-300 group h-full">
+                    <div class="w-12 h-12 bg-slate-50 rounded-sm flex items-center justify-center mb-6 group-hover:bg-amber-50 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-slate-700 group-hover:text-amber-700 transition-colors"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors">Flexible Realism</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">Policy grounded in what is possible. Seeking good relations without imposing our governing system on other nations.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-sm shadow-sm border-l-4 border-slate-200 hover:border-amber-600 transition-all duration-300 group h-full">
+                    <div class="w-12 h-12 bg-slate-50 rounded-sm flex items-center justify-center mb-6 group-hover:bg-amber-50 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-slate-700 group-hover:text-amber-700 transition-colors"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors">Sovereignty & Respect</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">Unapologetically protecting our sovereignty from erosion by transnational organizations and foreign interference.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white p-8 rounded-sm shadow-sm border-l-4 border-slate-200 hover:border-amber-600 transition-all duration-300 group h-full">
+                    <div class="w-12 h-12 bg-slate-50 rounded-sm flex items-center justify-center mb-6 group-hover:bg-amber-50 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-slate-700 group-hover:text-amber-700 transition-colors"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors">Burden-Sharing</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">Insisting on fairness. Allies must assume primary responsibility for their regions and meet defense spending commitments.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="bg-white p-8 rounded-sm shadow-sm border-l-4 border-slate-200 hover:border-amber-600 transition-all duration-300 group h-full">
+                    <div class="w-12 h-12 bg-slate-50 rounded-sm flex items-center justify-center mb-6 group-hover:bg-amber-50 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-slate-700 group-hover:text-amber-700 transition-colors"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors">Balance of Power</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">Working with partners to prevent the emergence of a dominant adversary in key global regions.</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="bg-white p-8 rounded-sm shadow-sm border-l-4 border-slate-200 hover:border-amber-600 transition-all duration-300 group h-full">
+                    <div class="w-12 h-12 bg-slate-50 rounded-sm flex items-center justify-center mb-6 group-hover:bg-amber-50 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-slate-700 group-hover:text-amber-700 transition-colors"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors">Pro-American Worker</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">Prioritizing the reindustrialization of our economy to ensure prosperity is broadly based and benefits our citizens.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Priorities Section -->
+    <section id="priorities" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-4">National Priorities</h2>
+                <div class="w-20 h-1 bg-amber-600 mb-6"></div>
+                <p class="text-lg text-slate-600 max-w-2xl">
+                    Five interconnected priorities define the operational focus of the 2025 strategy, moving from domestic security to global realignment.
+                </p>
+            </div>
+
+
+            <div class="max-w-5xl">
+                <!-- Priority 1 -->
+                <div class="flex flex-col md:flex-row gap-8 py-12 border-b border-slate-200">
+                    <div class="md:w-1/4 flex flex-col items-start">
+                        <span class="text-6xl font-serif text-slate-200 font-bold mb-4">01</span>
+                        <div class="flex items-center gap-3 text-amber-700 font-bold uppercase tracking-wider text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            <span>Strategic Priority</span>
+                        </div>
+                    </div>
+                    <div class="md:w-3/4">
+                        <h3 class="text-2xl font-serif font-bold text-slate-900 mb-4">Ending Mass Migration</h3>
+                        <p class="text-slate-600 leading-relaxed text-lg">Securing the border is the primary element of national security. The strategy calls for protecting the nation from invasion, terrorism, and drugs. "The era of mass migration must end."</p>
+                    </div>
+                </div>
+
+
+                <!-- Priority 2 -->
+                <div class="flex flex-col md:flex-row gap-8 py-12 border-b border-slate-200">
+                    <div class="md:w-1/4 flex flex-col items-start">
+                        <span class="text-6xl font-serif text-slate-200 font-bold mb-4">02</span>
+                        <div class="flex items-center gap-3 text-amber-700 font-bold uppercase tracking-wider text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                            <span>Strategic Priority</span>
+                        </div>
+                    </div>
+                    <div class="md:w-3/4">
+                        <h3 class="text-2xl font-serif font-bold text-slate-900 mb-4">Protecting Core Liberties</h3>
+                        <p class="text-slate-600 leading-relaxed text-lg">Government powers must never be abused. The U.S. will oppose anti-democratic restrictions on core liberties among allies and ensuring domestic governance respects natural rights.</p>
+                    </div>
+                </div>
+
+
+                <!-- Priority 3 -->
+                <div class="flex flex-col md:flex-row gap-8 py-12 border-b border-slate-200">
+                    <div class="md:w-1/4 flex flex-col items-start">
+                        <span class="text-6xl font-serif text-slate-200 font-bold mb-4">03</span>
+                        <div class="flex items-center gap-3 text-amber-700 font-bold uppercase tracking-wider text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+                            <span>Strategic Priority</span>
+                        </div>
+                    </div>
+                    <div class="md:w-3/4">
+                        <h3 class="text-2xl font-serif font-bold text-slate-900 mb-4">Enforcing Burden-Sharing</h3>
+                        <p class="text-slate-600 leading-relaxed text-lg">Allies must meet commitments, specifically the Hague Commitment for NATO countries to spend 5% of GDP on defense. The U.S. shifts to being a convener, not the primary guarantor.</p>
+                    </div>
+                </div>
+
+
+                <!-- Priority 4 -->
+                <div class="flex flex-col md:flex-row gap-8 py-12 border-b border-slate-200">
+                    <div class="md:w-1/4 flex flex-col items-start">
+                        <span class="text-6xl font-serif text-slate-200 font-bold mb-4">04</span>
+                        <div class="flex items-center gap-3 text-amber-700 font-bold uppercase tracking-wider text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            <span>Strategic Priority</span>
+                        </div>
+                    </div>
+                    <div class="md:w-3/4">
+                        <h3 class="text-2xl font-serif font-bold text-slate-900 mb-4">Achieving Realignment Through Peace</h3>
+                        <p class="text-slate-600 leading-relaxed text-lg">Utilizing presidential diplomacy to resolve regional conflicts and realign nations toward U.S. interests, building on the success of the Abraham Accords.</p>
+                    </div>
+                </div>
+
+
+                 <!-- Priority 5 -->
+                 <div class="flex flex-col md:flex-row gap-8 py-12">
+                    <div class="md:w-1/4 flex flex-col items-start">
+                        <span class="text-6xl font-serif text-slate-200 font-bold mb-4">05</span>
+                        <div class="flex items-center gap-3 text-amber-700 font-bold uppercase tracking-wider text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                            <span>Strategic Priority</span>
+                        </div>
+                    </div>
+                    <div class="md:w-3/4">
+                        <h3 class="text-2xl font-serif font-bold text-slate-900 mb-4">Ensuring Economic Security</h3>
+                        <p class="text-slate-600 leading-relaxed text-lg">Recognizing that national security is fundamentally dependent on economic strength. This involves re-shoring industry and achieving energy dominance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Regional Strategies Section -->
+    <section id="regions" class="py-24 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-4">Regional Strategies</h2>
+                <div class="w-20 h-1 bg-amber-600 mb-6"></div>
+                <p class="text-slate-600 max-w-2xl">
+                    Tailored approaches to key theaters, recognizing that the U.S. cannot be equally attentive to every region.
+                </p>
+            </div>
+
+
+            <div class="flex flex-col md:flex-row gap-0 bg-white rounded-sm shadow-xl overflow-hidden min-h-[500px]">
+                <!-- Tabs -->
+                <div class="flex flex-col border-r border-slate-100 py-8 bg-white z-10 w-full md:w-auto">
+                    <button onclick="switchTab('western')" id="tab-western" class="region-tab px-6 py-4 text-left font-serif font-bold text-lg transition-all duration-300 border-l-4 w-full md:w-72 bg-amber-50 border-amber-600 text-amber-900 pl-8">
+                        Western Hemisphere
+                    </button>
+                    <button onclick="switchTab('asia')" id="tab-asia" class="region-tab px-6 py-4 text-left font-serif font-bold text-lg transition-all duration-300 border-l-4 w-full md:w-72 border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-800">
+                        Indo-Pacific
+                    </button>
+                    <button onclick="switchTab('europe')" id="tab-europe" class="region-tab px-6 py-4 text-left font-serif font-bold text-lg transition-all duration-300 border-l-4 w-full md:w-72 border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-800">
+                        Europe
+                    </button>
+                    <button onclick="switchTab('middle_east')" id="tab-middle_east" class="region-tab px-6 py-4 text-left font-serif font-bold text-lg transition-all duration-300 border-l-4 w-full md:w-72 border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-800">
+                        Middle East
+                    </button>
+                </div>
+
+
+                <!-- Content Area -->
+                <div class="p-8 md:p-12 flex-1 flex flex-col justify-center bg-white relative">
+                    
+                    <!-- Western Hemisphere Content -->
+                    <div id="content-western" class="region-content fade-in">
+                        <h3 class="text-3xl font-serif font-bold text-slate-900 mb-6">Western Hemisphere: The Trump Corollary</h3>
+                        <p class="text-lg text-slate-700 leading-relaxed mb-8">Reasserting American preeminence in the Western Hemisphere through a 'Trump Corollary' to the Monroe Doctrine. The goal is to deny non-Hemispheric competitors the ability to position forces or control strategic assets.</p>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">ENLIST: Work with partners to control migration and neutralize cartels.</p></div>
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">EXPAND: Use U.S. leverage in finance/tech to push out foreign influence.</p></div>
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">Secure supply chains and identify strategic acquisition opportunities.</p></div>
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">Deploy stronger Coast Guard/Navy presence.</p></div>
+                        </div>
+                    </div>
+
+
+                    <!-- Asia Content -->
+                    <div id="content-asia" class="region-content hidden fade-in">
+                        <h3 class="text-3xl font-serif font-bold text-slate-900 mb-6">Asia: Winning the Competition</h3>
+                        <p class="text-lg text-slate-700 leading-relaxed mb-8">The primary goal is to win the long-term economic and technological competition while deterring conflict over Taiwan and the South China Sea.</p>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">Rebalance economic relationships to end predatory practices and IP theft.</p></div>
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">Leverage combined economic power of U.S. ($30T) and allies ($35T).</p></div>
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">Military Objective: Deny aggression in the First Island Chain.</p></div>
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">Press allies (Japan, South Korea) to significantly increase defense spending.</p></div>
+                        </div>
+                    </div>
+
+
+                    <!-- Europe Content -->
+                    <div id="content-europe" class="region-content hidden fade-in">
+                        <h3 class="text-3xl font-serif font-bold text-slate-900 mb-6">Europe: Fostering Self-Confidence</h3>
+                        <p class="text-lg text-slate-700 leading-relaxed mb-8">The strategy aims to foster Europe's civilizational self-confidence and enable it to take primary responsibility for its own defense.</p>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">Negotiate expeditious cessation of hostilities in Ukraine.</p></div>
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">Encourage patriotic parties that promote a 'revival of spirit'.</p></div>
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">End the perception of NATO as a perpetually expanding alliance.</p></div>
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">Address economic stagnation and erosion of liberty.</p></div>
+                        </div>
+                    </div>
+
+
+                    <!-- Middle East Content -->
+                    <div id="content-middle_east" class="region-content hidden fade-in">
+                        <h3 class="text-3xl font-serif font-bold text-slate-900 mb-6">Middle East: Burden Shifting</h3>
+                        <p class="text-lg text-slate-700 leading-relaxed mb-8">Ending the era of American policy dominance by shifting burdens to regional partners while maintaining core interests like freedom of navigation.</p>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">Focus on partnership in nuclear energy, AI, and defense tech.</p></div>
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">Expand Abraham Accords to more nations.</p></div>
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">Combat radicalism without hectoring partners on traditions.</p></div>
+                            <div class="flex items-start gap-3"><div class="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0"></div><p class="text-slate-600">Iran strategy: Leverage weakened state following Operation Midnight Hammer.</p></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Economic Security Section -->
+    <section id="economic" class="py-24 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-slate-800 pb-8">
+                <div class="max-w-2xl">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Economic Security</h2>
+                    <p class="text-xl text-slate-400">
+                        National security is fundamentally dependent on economic strength. The strategy outlines a five-pillar approach to re-shore and rebuild.
+                    </p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-800"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5-7-5-4 2Z"/><path d="M9 12v6"/><path d="M15 12v6"/></svg>
+                </div>
+            </div>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-slate-800 p-8 rounded-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-amber-500 mb-4"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <h4 class="text-xl font-bold mb-3 font-serif">Energy Dominance</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Restore dominance in oil, gas, coal, and nuclear to fuel reindustrialization and lower costs. Reject "Net Zero" ideologies to deepen relationships with allies through exports.
+                    </p>
+                </div>
+
+
+                <!-- Card 2 -->
+                <div class="bg-slate-800 p-8 rounded-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-amber-500 mb-4"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5-7-5-4 2Z"/><path d="M9 12v6"/><path d="M15 12v6"/></svg>
+                    <h4 class="text-xl font-bold mb-3 font-serif">Reindustrialization</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Re-shore industrial production with a focus on critical and emerging technologies. Make America the "maker" of the future through strategic tariffs and innovation.
+                    </p>
+                </div>
+
+
+                <!-- Card 3 -->
+                <div class="bg-slate-800 p-8 rounded-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-amber-500 mb-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <h4 class="text-xl font-bold mb-3 font-serif">Defense Industrial Base</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Launch a national mobilization to innovate low-cost, high-impact defenses. Produce modern systems and munitions at scale to ensure deterrence.
+                    </p>
+                </div>
+
+
+                 <!-- Card 4 -->
+                 <div class="bg-slate-800 p-8 rounded-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-amber-500 mb-4"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+                    <h4 class="text-xl font-bold mb-3 font-serif">Balanced Trade</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Reduce trade deficits and end predatory practices through fair, reciprocal deals. Use strategic tariffs to protect American workers and industries.
+                    </p>
+                </div>
+
+
+                <!-- Card 5 -->
+                <div class="bg-slate-800 p-8 rounded-sm lg:col-span-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-amber-500 mb-4"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <h4 class="text-xl font-bold mb-3 font-serif">Secure Supply Chains</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Eliminate dependence on any outside power for core components, from raw materials to finished products. This includes identifying strategic points in the Western Hemisphere for joint development.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-500 py-12 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-slate-700"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span class="font-serif font-bold text-slate-400 uppercase tracking-widest text-sm">The White House</span>
+            </div>
+            <div class="text-xs text-center md:text-right">
+                <p>November 2025 • National Security Strategy</p>
+                <p class="mt-1 text-slate-600">Based on official documentation • For educational and policy review purposes.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script>
+        // --- Navigation Scroll Effect ---
+        const navbar = document.getElementById('navbar');
+        const navTitle = document.getElementById('nav-title');
+        const navSubtitle = document.getElementById('nav-subtitle');
+
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.remove('bg-transparent', 'py-6');
+                navbar.classList.add('bg-slate-900', 'shadow-lg', 'py-3');
+                // Optional: Change text colors if needed, but they are white/slate-300 by default which works on dark
+            } else {
+                navbar.classList.add('bg-transparent', 'py-6');
+                navbar.classList.remove('bg-slate-900', 'shadow-lg', 'py-3');
+            }
+            
+            // Highlight active link
+            const sections = ['home', 'principles', 'priorities', 'regions', 'economic'];
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= 200 && rect.bottom >= 200) {
+                        current = section;
+                    }
+                }
+            });
+
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-amber-400', 'border-b-2', 'border-amber-400');
+                link.classList.add('text-slate-300');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('text-amber-400', 'border-b-2', 'border-amber-400');
+                    link.classList.remove('text-slate-300');
+                }
+            });
+        });
+
+
+        // --- Mobile Menu Toggle ---
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+
+        // --- Tab Logic ---
+        function switchTab(region) {
+            // Update Tab Styles
+            const tabs = document.querySelectorAll('.region-tab');
+            tabs.forEach(tab => {
+                if (tab.id === `tab-${region}`) {
+                    tab.classList.remove('border-transparent', 'text-slate-500', 'hover:bg-slate-50', 'hover:text-slate-800');
+                    tab.classList.add('bg-amber-50', 'border-amber-600', 'text-amber-900', 'pl-8');
+                } else {
+                    tab.classList.add('border-transparent', 'text-slate-500', 'hover:bg-slate-50', 'hover:text-slate-800');
+                    tab.classList.remove('bg-amber-50', 'border-amber-600', 'text-amber-900', 'pl-8');
+                }
+            });
+
+
+            // Update Content
+            const contents = document.querySelectorAll('.region-content');
+            contents.forEach(content => {
+                if (content.id === `content-${region}`) {
+                    content.classList.remove('hidden');
+                    // Retrigger animation
+                    content.classList.remove('fade-in');
+                    void content.offsetWidth; // trigger reflow
+                    content.classList.add('fade-in');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
